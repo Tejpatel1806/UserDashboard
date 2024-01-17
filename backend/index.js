@@ -21,9 +21,9 @@ app.get("/api/user/:id", (req, res) => {
 
 app.put("/api/userupdate/:id", (req, res) => {
   const taskId = Number(req.params.id);
-  console.log(req.body);
+  // console.log(req.body);
   const updatedTask = req.body;
-  console.log(taskId, updatedTask);
+  // console.log(taskId, updatedTask);
 
   const index = jsondata.findIndex((item) => item.id === taskId);
 
@@ -67,7 +67,10 @@ app.delete("/api/userdelete/:id", (req, res) => {
 app.post("/api/newuser", (req, res) => {
   const body = req.body;
   // console.log("body", body);
-  jsondata.push({ ...body, id: jsondata.length + 1 });
+  const newid = jsondata[jsondata.length - 1].id;
+  // console.log(newid);
+
+  jsondata.push({ ...body, id: newid + 1 });
   fs.writeFile(dataFilePath, JSON.stringify(jsondata), (err) => {
     if (err) {
       console.log(err);
@@ -76,7 +79,6 @@ app.post("/api/newuser", (req, res) => {
     }
   });
 });
-
 
 app.listen(8000, (req, res) => {
   console.log("Server is listening from port 8000");

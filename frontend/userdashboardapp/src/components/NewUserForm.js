@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 const NewUserForm = () => {
   const navigate = useNavigate();
   const [editedDetails, setEditedDetails] = useState({
-    userName: "",
+    user_name: "",
     email: "",
     role: "",
   });
@@ -15,29 +15,28 @@ const NewUserForm = () => {
       [name]: value,
     }));
   };
-  const handleSubmit = async (e) => {
+
+  const handlecreateuser = async (e) => {
     e.preventDefault();
 
     const formData = {
-      user_name: editedDetails.userName,
+      user_name: editedDetails.user_name,
       email: editedDetails.email,
       role: editedDetails.role,
     };
     console.log(JSON.stringify(formData));
     try {
-      const response = await fetch(
-        `http://localhost:8000/api/newuser`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      const response = await fetch(`http://localhost:8000/api/newuser`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
       if (response.ok) {
         console.log("User updated successfully");
+        navigate("/");
       } else {
         console.error("Failed to update user:", response.statusText);
         // Handle error scenario as needed
@@ -46,10 +45,12 @@ const NewUserForm = () => {
       console.error("Error updating user:", error);
       // Handle error scenario as needed
     }
+
+    console.log("submit created");
   };
 
   return (
-    <form class="max-w-sm mx-auto mt-[150px]" onSubmit={handleSubmit}>
+    <form class="max-w-sm mx-auto mt-[150px]" onSubmit={handlecreateuser}>
       <div className="mb-[50px] font-medium text-blue-500 ">Create User</div>
       <div class="mb-5">
         <label
@@ -60,8 +61,9 @@ const NewUserForm = () => {
         </label>
         <input
           type="text"
-          id="email"
-          value={editedDetails.userName}
+          id="username"
+          name="user_name"
+          value={editedDetails.user_name}
           onChange={handleChange}
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           required
@@ -76,8 +78,9 @@ const NewUserForm = () => {
         </label>
         <input
           type="email"
-          id="password"
-          value={editedDetails.userName}
+          id="email"
+          name="email"
+          value={editedDetails.email}
           onChange={handleChange}
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="name@flowbite.com"
@@ -86,15 +89,16 @@ const NewUserForm = () => {
       </div>
       <div class="mb-5">
         <label
-          for="password"
+          for="role"
           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
         >
           Your Role
         </label>
         <input
           type="text"
-          id="password"
-          value={editedDetails.userName}
+          id="role"
+          name="role"
+          value={editedDetails.role}
           onChange={handleChange}
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           required

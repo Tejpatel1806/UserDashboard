@@ -10,7 +10,6 @@ const EditUserModal = ({ isOpen, onClose, onEdit, id }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        
         const response = await fetch(`http://localhost:8000/api/user/${id}`);
         const data = await response.json();
         console.log(data);
@@ -28,28 +27,30 @@ const EditUserModal = ({ isOpen, onClose, onEdit, id }) => {
     }
   }, [isOpen]);
 
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     const formData = {
       user_name: editedDetails.user_name,
       email: editedDetails.email,
       role: editedDetails.role,
     };
-   console.log(JSON.stringify(formData));
+    console.log(JSON.stringify(formData));
     try {
-      const response = await fetch(`http://localhost:8000/api/userupdate/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-  
+      const response = await fetch(
+        `http://localhost:8000/api/userupdate/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+
       if (response.ok) {
         console.log("User updated successfully");
-        
+
         // Additional logic if needed
         onClose(); // Close the modal or do other actions
       } else {
@@ -77,13 +78,13 @@ const EditUserModal = ({ isOpen, onClose, onEdit, id }) => {
       <div className="flex items-center justify-center min-h-screen">
         <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
           <h2 className="text-2xl font-bold mb-4">Edit User Details</h2>
-          <form  onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit}>
             <label className="block mb-4">
               User Name:
               <input
                 type="text"
-                name="userName"
-                value={editedDetails.userName}
+                name="user_name"
+                value={editedDetails.user_name}
                 onChange={handleChange}
                 className="border border-gray-300 p-2 w-full mt-1"
               />

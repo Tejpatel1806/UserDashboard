@@ -27,10 +27,13 @@ const UserDetails = () => {
   const handleDelete = async () => {
     try {
       // Send a DELETE request to the backend API with the user ID
-      alert("Are you sure want to delete this User")
-      const response = await fetch(`http://localhost:8000/api/userdelete/${id}`, {
-        method: "DELETE",
-      });
+      alert("Are you sure want to delete this User");
+      const response = await fetch(
+        `http://localhost:8000/api/userdelete/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
 
       if (response.ok) {
         console.log("User deleted successfully");
