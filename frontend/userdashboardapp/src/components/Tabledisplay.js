@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Tabledisplay() {
   const [data, setData] = useState([]);
-
+  const navigate = useNavigate();
   const columns = [
     {
-      title: "First Name",
-      dataIndex: "first_name",
-      key: "first_name",
+      title: "Id",
+      dataIndex: "id",
+      key: "id",
     },
     {
-      title: "Last Name",
-      dataIndex: "last_name",
-      key: "last_name",
+      title: "User Name",
+      dataIndex: "user_name",
+      key: "user_name",
     },
     {
       title: "Email",
@@ -21,29 +21,22 @@ function Tabledisplay() {
       key: "email",
     },
     {
-      title: "Actions",
-      key: "actions",
-      render: (text, record) => (
-        <span>
-          <Link
-            to={`/edit/${record.key}`}
-            className="text-blue-500 hover:underline mr-2"
-          >
-            Edit
-          </Link>
-          <button
-            className="text-red-500 hover:underline"
-            onClick={() => handleDelete(record.key)}
-          >
-            Delete
-          </button>
-        </span>
-      ),
+      title: "Role",
+      dataIndex: "role",
+      key: "role",
     },
+   
   ];
+  const hello = (id) => {
+    
+   
+    navigate(`/details/${id}`)
+  };
+ 
 
   const dataget = async () => {
     try {
+      console.log("Called API")
       const response = await fetch("http://localhost:8000/api/users");
       const data = await response.json();
       console.log("data", data);
@@ -52,45 +45,46 @@ function Tabledisplay() {
       console.error("Error fetching data:", error);
     }
   };
-
-  const handleDelete = (key) => {
-    // Handle delete logic here
-    console.log("Delete button clicked for key:", key);
-  };
-
   useEffect(() => {
+   
     dataget();
   }, []);
+  const handleCreateUser = () => {
+    navigate("/create-user");
+  };
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <div className="w-full max-w-screen-md">
-        <table className="min-w-full border border-collapse border-gray-200 shadow-md rounded-md">
-          <thead className="bg-gray-100">
-            <tr>
-              {columns.map((column) => (
-                <th key={column.key} className="py-2 px-4 border-b">
-                  {column.title}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((item, index) => (
-              <tr key={index}>
-                {columns.map((column) => (
-                  <td key={column.key} className="py-2 px-4 border-2">
-                    {column.render
-                      ? column.render(item[column.dataIndex], item)
-                      : item[column.dataIndex]}
-                  </td>
-                ))}
-              </tr>
+    <div className="w-full max-w-screen-md">
+      <table className="min-w-full border border-collapse border-gray-200 shadow-md rounded-md">
+        <thead className="bg-gray-100">
+          <tr>
+            {columns.map((column) => (
+              <th key={column.key} className="py-2 px-4 border-b">
+                {column.title}
+              </th>
             ))}
-          </tbody>
-        </table>
-      </div>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((item, index) => (
+            <tr key={index} style={{ cursor: 'pointer' }} onClick={() => hello(item.id)}>
+              {columns.map((column) => (
+                <td key={column.key} className="py-2 px-4 border-2">
+                  {column.render
+                    ? column.render(item[column.dataIndex], item)
+                    : item[column.dataIndex]}
+                </td>
+              ))}
+             
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <button type="button" className="border rounded-md text-center w-[100px] mt-5 ml-[330px] bg-blue-300" onClick={handleCreateUser}> Create User</button>
     </div>
+  </div>
+
   );
 }
 
