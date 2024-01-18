@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from “react-router-dom”;
+import { useNavigate } from "react-router-dom";
 const EditUserModal = ({ isOpen, onClose, onEdit, id }) => {
   const navigate = useNavigate();
   const [editedDetails, setEditedDetails] = useState({
@@ -51,8 +51,8 @@ const EditUserModal = ({ isOpen, onClose, onEdit, id }) => {
 
       if (response.ok) {
         console.log("User updated successfully");
-        navigate(“/”);
-        onClose(); 
+        navigate("/");
+        onClose();
       } else {
         console.error("Failed to update user:", response.statusText);
       }
