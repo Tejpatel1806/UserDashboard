@@ -39,13 +39,10 @@ const NewUserForm = () => {
         navigate("/");
       } else {
         console.error("Failed to update user:", response.statusText);
-        // Handle error scenario as needed
       }
     } catch (error) {
       console.error("Error updating user:", error);
-      // Handle error scenario as needed
     }
-
     console.log("submit created");
   };
 

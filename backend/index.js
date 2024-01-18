@@ -8,9 +8,26 @@ const dataFilePath = path.resolve(__dirname, "../mockdata.json");
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors());
+const itemsPerPage = 3; 
 app.get("/api/users", (req, res) => {
-  // console.log("jsondata = ", jsondata)
-  res.json(require("../mockdata.json"));
+   
+  const page = req.query.page || 1;
+  const startIndex = (page - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
+  const paginatedData = jsondata.slice(startIndex, endIndex);
+  
+  res.json({
+    totalItems: jsondata.length,
+    currentPage: page,
+    totalPages: Math.ceil(jsondata.length / itemsPerPage),
+    users: paginatedData
+  });
+
+
+
+
+  // res.json(require("../mockdata.json"));
 });
 
 app.get("/api/user/:id", (req, res) => {

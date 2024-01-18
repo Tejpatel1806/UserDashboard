@@ -50,16 +50,12 @@ const EditUserModal = ({ isOpen, onClose, onEdit, id }) => {
 
       if (response.ok) {
         console.log("User updated successfully");
-
-        // Additional logic if needed
-        onClose(); // Close the modal or do other actions
+        onClose(); 
       } else {
         console.error("Failed to update user:", response.statusText);
-        // Handle error scenario as needed
       }
     } catch (error) {
       console.error("Error updating user:", error);
-      // Handle error scenario as needed
     }
   };
 
