@@ -30,22 +30,37 @@ Clone the repository:
 
 
 ```Copy code
-git clone https://github.com/your-username/user-dashboard-app.git
+git clone https://github.com/Tejpatel1806/UserDashboard.git
 
 ```
-Navigate to the project directory:
+Navigate to the backend directory:
 ```Copy code
-   cd user-dashboard-app
+cd backend
 ```
 Install dependencies:
 ```copy code
-   npm install
+npm install
    ```
-
+Start the server:
+```Copy code
+nodemon index.js
+```
+Navigate to the frontend directory:
+```Copy code
+cd frontend
+```
+Navigate to the userdashboardapp directory:
+```Copy code
+cd userdashboardapp
+```
+Install dependencies:
+```copy code
+npm install
+   ```
 Start the application:
 ```copy code
-npm start
-```
+npm run start
+   ```
 
 The app will be accessible at http://localhost:3000 by default.
 
@@ -59,31 +74,21 @@ Click the "Submit" button to add the new user.
 ```
 Updating Users
 ```
-
 Navigate to the User List page.
 Click on the user you want to update.
 Select the "Edit" option and modify the necessary details.
-Save the changes by clicking the "Update" button.
+Save the changes by clicking the "Save Changes" button.
 ```
 
 Deleting Users
 ```
-
 Navigate to the User List page.
-Locate the user you want to delete.
+Click on the user you want to update.
 Select the "Delete" option and confirm the action.
-```
-
-Viewing User List
-```
-
-Access the User List page from the navigation menu.
-Browse through the list of users.
 ```
 
 User Detailed Page
 ```
-
 Click on a user's name from the User List to view detailed information.
 ```
 
