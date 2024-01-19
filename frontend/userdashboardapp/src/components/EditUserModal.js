@@ -74,7 +74,7 @@ const EditUserModal = ({ isOpen, onClose, onEdit, id }) => {
       className={`fixed inset-0 z-50 overflow-auto ${isOpen ? "" : "hidden"}`}
     >
       <div className="flex items-center justify-center min-h-screen">
-        <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
+        <div className=" bg-blue-50 p-8 rounded shadow-md w-full max-w-md">
           <h2 className="text-2xl font-bold mb-4">Edit User Details</h2>
           <form onSubmit={handleSubmit}>
             <label className="block mb-4">

@@ -23,11 +23,6 @@ app.get("/api/users", (req, res) => {
     totalPages: Math.ceil(jsondata.length / itemsPerPage),
     users: paginatedData
   });
-
-
-
-
-  // res.json(require("../mockdata.json"));
 });
 
 app.get("/api/user/:id", (req, res) => {
@@ -38,10 +33,7 @@ app.get("/api/user/:id", (req, res) => {
 
 app.put("/api/userupdate/:id", (req, res) => {
   const taskId = Number(req.params.id);
-  // console.log(req.body);
   const updatedTask = req.body;
-  // console.log(taskId, updatedTask);
-
   const index = jsondata.findIndex((item) => item.id === taskId);
 
   if (index !== -1) {
@@ -61,7 +53,6 @@ app.put("/api/userupdate/:id", (req, res) => {
 });
 
 app.delete("/api/userdelete/:id", (req, res) => {
-  // console.log(jsondata);
   const taskId = Number(req.params.id);
   const index = jsondata.findIndex((item) => item.id === taskId);
 
@@ -83,10 +74,7 @@ app.delete("/api/userdelete/:id", (req, res) => {
 
 app.post("/api/newuser", (req, res) => {
   const body = req.body;
-  // console.log("body", body);
   const newid = jsondata[jsondata.length - 1].id;
-  // console.log(newid);
-
   jsondata.push({ ...body, id: newid + 1 });
   fs.writeFile(dataFilePath, JSON.stringify(jsondata), (err) => {
     if (err) {

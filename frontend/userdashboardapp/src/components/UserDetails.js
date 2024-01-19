@@ -50,14 +50,12 @@ const UserDetails = (props) => {
     <>
      
       <div className="container mx-auto mt-8">
-        <div className="bg-white p-8 rounded shadow-md">
+        <div className= "bg-blue-50 p-8 rounded shadow-md">
           <h1 className="text-2xl font-bold mb-4">User Details</h1>
           <p className="text-lg">User ID: {id}</p>
           <p className="text-lg">User Name:- {selectedUser.user_name}</p>
           <p className="text-lg">User Email:- {selectedUser.email}</p>
           <p className="text-lg">User Role:- {selectedUser.role}</p>
-
-         
           <div className="mt-6 flex space-x-4">
             <button
               onClick={handleEdit}
